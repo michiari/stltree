@@ -662,7 +662,7 @@ def decompose_imply_classic(tableau_data, node, index, mode='sat'):
                 if operand.operator == 'G' and operand.parent == imply_op.parent and operand.is_derived() and operand.id_implication == imply_op.id_implication:
                     # We are modifying the existing G node, so we need to make a copy
                     new_node.operands[i] = operand.shallow_copy()
-                    new_node.operands[i].upper = operand.upper
+                    new_node.operands[i].upper = imply_op.upper
                     return None
         return imply_op
 
