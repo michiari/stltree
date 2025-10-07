@@ -114,5 +114,8 @@ class TestTableau(unittest.TestCase):
         shift_bounds(node)
         self.assertEqual(node.to_list(), expected)
 
+    def test_merge_imply_G(self):
+        self.make_test("G[0, 10] (a -> G[10, 15] b) && G[0, 10] a && G[16, 16] !b", 200, False)
+
 if __name__ == '__main__':
     unittest.main()
