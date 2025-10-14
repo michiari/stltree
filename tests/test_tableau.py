@@ -91,6 +91,9 @@ class TestTableau(unittest.TestCase):
     def test_U_parent(self):
         self.make_test("(G[0,89] F[88,100] a2 U[0,78] !a1) && a1", 500, True, mltl=True)
 
+    def test_G_initial_upper(self):
+        self.make_test("G[0,53] ((G[0,38] (! a0 && (F[0,54] (a0)))))", 500, False, mltl=True)
+
     def test_shift_bounds_GF(self):
         formula = [
             ',',
