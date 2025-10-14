@@ -320,7 +320,7 @@ def decompose_all_G_nodes(tableau_opts, outer_node, current_time):
             # Modify bounds adding that of the external G
             extract = arg.shallow_copy()
             extract.lower = arg.lower + G_node.lower
-            extract.upper = arg.upper + G_node.lower
+            extract.upper = extract.initial_upper = arg.upper + G_node.lower
             extract.parent = G_node.identifier if G_node.lower < G_node.upper else None
             extract.set_initial_time()
             return extract
@@ -331,19 +331,19 @@ def decompose_all_G_nodes(tableau_opts, outer_node, current_time):
                     outer_node.operands[i] = operand.shallow_copy()
                     outer_node.operands[i].upper += 1
                     G_counter += 1
-                    if G_node.lower == G_node.upper:
+                    if G_node.lower == G_node.initial_upper:
                         outer_node.operands[i].parent = None
                 elif operand.operator == 'O' and operand.operands[0].operator == 'G' and operand.operands[0].is_derived() and operand.operands[0].parent == G_node.identifier and operand.operands[0].and_element == arg.and_element:
                     operand.operands[0] = operand.operands[0].shallow_copy()
                     operand.operands[0].upper += 1
                     G_counter += 1
-                    if G_node.lower == G_node.upper:
+                    if G_node.lower == G_node.initial_upper:
                         operand.operands[0].parent = None
             if G_counter == 0:
                 extract = arg.shallow_copy()
                 extract.lower = arg.lower + G_node.lower
-                extract.upper = arg.upper + G_node.lower
-                extract.parent = G_node.identifier if G_node.lower < G_node.upper else None
+                extract.upper = extract.initial_upper = arg.upper + G_node.lower
+                extract.parent = G_node.identifier if G_node.lower < G_node.initial_upper else None
                 extract.set_initial_time()
                 return extract
             else:
@@ -390,9 +390,9 @@ def decompose_all_G_nodes(tableau_opts, outer_node, current_time):
         new_operands = modify_argument(G_node.operands[0], G_node, formula_opts, formula_opts)
         if new_operands:
             outer_node.operands.append(new_operands)
-        if G_node.lower == G_node.upper:
+        if G_node.lower == G_node.initial_upper:
             # Set parent to None (we do it here so that it doesn't interfere with modify_argument)
-            for j, other in enumerate(outer_node.operands):
+            for other in outer_node.operands:
                 temp_op = other.operands[0] if other.operator == 'O' else other
                 if temp_op.operator in {'G', 'U', 'R', 'F'} and temp_op.is_derived() and temp_op.parent == G_node.identifier:
                     temp_op.parent = None

@@ -59,6 +59,8 @@ class Node:
             print(operator, args)
             raise ValueError('Bad formula' + operator + str(args))
 
+        self.initial_upper = self.upper # to remember the original upper bound when shifting bounds
+
         # Convert operands to Nodes, if any
         if self.operator != 'P' and len(self.operands) > 0 and not isinstance(self.operands[0], Node):
             self.operands = [Node(*op) for op in self.operands]
@@ -104,6 +106,7 @@ class Node:
         new.siblings_imply = False
         new.lower = self.lower
         new.upper = self.upper
+        new.initial_upper = self.initial_upper
         new.operands = self.operands.copy()
         if hasattr(self, 'satisfied_implications'):
             new.satisfied_implications = self.satisfied_implications.copy()
