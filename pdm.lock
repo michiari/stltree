@@ -5,7 +5,7 @@
 groups = ["default", "dev"]
 strategy = ["inherit_metadata"]
 lock_version = "4.5.0"
-content_hash = "sha256:a0762e52818b8d474625fe3114152953be3e6430145c968c4b53198f9925629a"
+content_hash = "sha256:074c6ab8eea83f7ec43c8eb78896fbb6f873f6c7313342e61809fe50d3d93116"
 
 [[metadata.targets]]
 requires_python = "==3.12.3"
@@ -23,18 +23,18 @@ platform = "manylinux_2_41_x86_64"
 
 [[package]]
 name = "choreographer"
-version = "1.0.9"
+version = "1.1.2"
 requires_python = ">=3.8"
 summary = "Devtools Protocol implementation for chrome."
 groups = ["dev"]
-marker = "python_version >= \"3.13\""
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 dependencies = [
     "logistro>=1.0.11",
     "simplejson>=3.19.3",
 ]
 files = [
-    {file = "choreographer-1.0.9-py3-none-any.whl", hash = "sha256:b3277e30953843a83d3d730e49958a6be82013885d2a4f54b3950a3715191d7f"},
-    {file = "choreographer-1.0.9.tar.gz", hash = "sha256:36423b4b049cf2ec2a68fa4024bdd22d0c417d5421913ef62b6c0e89595b6895"},
+    {file = "choreographer-1.1.2-py3-none-any.whl", hash = "sha256:b410f59c804bae50849f6b5d861713213e5363a257b72c58a122a9e8a0600324"},
+    {file = "choreographer-1.1.2.tar.gz", hash = "sha256:d091ee7bb82bdf27fd4b62937cabf0f5fc87437839ee037b2fb2088b76ffa8ba"},
 ]
 
 [[package]]
@@ -111,24 +111,11 @@ files = [
 
 [[package]]
 name = "fonttools"
-version = "4.58.4"
-requires_python = ">=3.9"
-summary = "Tools to manipulate font files"
-groups = ["default"]
-marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\""
-files = [
-    {file = "fonttools-4.58.4-cp312-cp312-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:2d42c63020a922154add0a326388a60a55504629edc3274bc273cd3806b4659f"},
-    {file = "fonttools-4.58.4-py3-none-any.whl", hash = "sha256:a10ce13a13f26cbb9f37512a4346bb437ad7e002ff6fa966a7ce7ff5ac3528bd"},
-    {file = "fonttools-4.58.4.tar.gz", hash = "sha256:928a8009b9884ed3aae17724b960987575155ca23c6f0b8146e400cc9e0d44ba"},
-]
-
-[[package]]
-name = "fonttools"
 version = "4.58.5"
 requires_python = ">=3.9"
 summary = "Tools to manipulate font files"
 groups = ["default"]
-marker = "python_version >= \"3.13\""
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 files = [
     {file = "fonttools-4.58.5-cp313-cp313-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:a6d7709fcf4577b0f294ee6327088884ca95046e1eccde87c53bbba4d5008541"},
     {file = "fonttools-4.58.5-py3-none-any.whl", hash = "sha256:e48a487ed24d9b611c5c4b25db1e50e69e9854ca2670e39a3486ffcd98863ec4"},
@@ -136,46 +123,46 @@ files = [
 ]
 
 [[package]]
+name = "iniconfig"
+version = "2.1.0"
+requires_python = ">=3.8"
+summary = "brain-dead simple config-ini parsing"
+groups = ["dev"]
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
+files = [
+    {file = "iniconfig-2.1.0-py3-none-any.whl", hash = "sha256:9deba5723312380e77435581c6bf4935c94cbfab9b1ed33ef8d238ea168eb760"},
+    {file = "iniconfig-2.1.0.tar.gz", hash = "sha256:3abbd2e30b36733fee78f9c7f7308f2d0050e88f0087fd25c2645f63c773e1c7"},
+]
+
+[[package]]
 name = "joblib"
-version = "1.5.1"
+version = "1.5.2"
 requires_python = ">=3.9"
 summary = "Lightweight pipelining with Python functions"
 groups = ["dev"]
 marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 files = [
-    {file = "joblib-1.5.1-py3-none-any.whl", hash = "sha256:4719a31f054c7d766948dcd83e9613686b27114f190f717cec7eaa2084f8a74a"},
-    {file = "joblib-1.5.1.tar.gz", hash = "sha256:f4f86e351f39fe3d0d32a9f2c3d8af1ee4cec285aafcb27003dda5205576b444"},
+    {file = "joblib-1.5.2-py3-none-any.whl", hash = "sha256:4e1f0bdbb987e6d843c70cf43714cb276623def372df3c22fe5266b2670bc241"},
+    {file = "joblib-1.5.2.tar.gz", hash = "sha256:3faa5c39054b2f03ca547da9b2f52fde67c06240c31853f306aea97f13647b55"},
 ]
 
 [[package]]
 name = "kaleido"
-version = "0.2.1"
-summary = "Static image export for web-based visualization libraries with zero dependencies"
-groups = ["dev"]
-marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\""
-dependencies = [
-    "pathlib; python_version < \"3.4\"",
-]
-files = [
-    {file = "kaleido-0.2.1-py2.py3-none-manylinux1_x86_64.whl", hash = "sha256:aa21cf1bf1c78f8fa50a9f7d45e1003c387bd3d6fe0a767cfbbf344b95bdc3a8"},
-]
-
-[[package]]
-name = "kaleido"
-version = "1.0.0"
+version = "1.1.0"
 requires_python = ">=3.8"
 summary = "Plotly graph export library"
 groups = ["dev"]
-marker = "python_version >= \"3.13\""
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 dependencies = [
-    "choreographer>=1.0.5",
+    "choreographer>=1.0.10",
     "logistro>=1.0.8",
     "orjson>=3.10.15",
     "packaging",
+    "pytest-timeout>=2.4.0",
 ]
 files = [
-    {file = "kaleido-1.0.0-py3-none-any.whl", hash = "sha256:a7e8bd95648378d2746f6c86084d419d15f95b1ec7bb0ec810289b7feb25b18d"},
-    {file = "kaleido-1.0.0.tar.gz", hash = "sha256:502d8ba64737924efaf5e94c2736745bcc7c926e6cc535838be36c0fc06330bd"},
+    {file = "kaleido-1.1.0-py3-none-any.whl", hash = "sha256:839ed2357b89dd2f93c478960f41c401fe4038d404ae33e2fdbde028c18d7430"},
+    {file = "kaleido-1.1.0.tar.gz", hash = "sha256:5747703a56d4c034efa69abea4a9c2bfe8ef516ba848e0ec485c65b3b0ab52b6"},
 ]
 
 [[package]]
@@ -210,7 +197,7 @@ version = "1.1.0"
 requires_python = ">=3.8"
 summary = "Simple wrapper over logging for a couple basic features"
 groups = ["dev"]
-marker = "python_version >= \"3.13\""
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 files = [
     {file = "logistro-1.1.0-py3-none-any.whl", hash = "sha256:4f88541fe7f3c545561b754d86121abd9c6d4d8b312381046a78dcd794fddc7c"},
     {file = "logistro-1.1.0.tar.gz", hash = "sha256:ad51f0efa2bc705bea7c266e8a759cf539457cf7108202a5eec77bdf6300d774"},
@@ -218,7 +205,7 @@ files = [
 
 [[package]]
 name = "matplotlib"
-version = "3.10.3"
+version = "3.10.7"
 requires_python = ">=3.10"
 summary = "Python plotting package"
 groups = ["default"]
@@ -231,14 +218,16 @@ dependencies = [
     "numpy>=1.23",
     "packaging>=20.0",
     "pillow>=8",
-    "pyparsing>=2.3.1",
+    "pyparsing>=3",
     "python-dateutil>=2.7",
 ]
 files = [
-    {file = "matplotlib-3.10.3-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ed70453fd99733293ace1aec568255bc51c6361cb0da94fa5ebf0649fdb2150a"},
-    {file = "matplotlib-3.10.3-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a80fcccbef63302c0efd78042ea3c2436104c5b1a4d3ae20f864593696364ac7"},
-    {file = "matplotlib-3.10.3-cp313-cp313t-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f6929fc618cb6db9cb75086f73b3219bbb25920cb24cee2ea7a12b04971a4158"},
-    {file = "matplotlib-3.10.3.tar.gz", hash = "sha256:2f82d2c5bb7ae93aaaa4cd42aca65d76ce6376f83304fa3a630b569aca274df0"},
+    {file = "matplotlib-3.10.7-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:d5f256d49fea31f40f166a5e3131235a5d2f4b7f44520b1cf0baf1ce568ccff0"},
+    {file = "matplotlib-3.10.7-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:b3c4ea4948d93c9c29dc01c0c23eef66f2101bf75158c291b88de6525c55c3d1"},
+    {file = "matplotlib-3.10.7-cp313-cp313t-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:786656bb13c237bbcebcd402f65f44dd61ead60ee3deb045af429d889c8dbc67"},
+    {file = "matplotlib-3.10.7-cp314-cp314-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:7146d64f561498764561e9cd0ed64fcf582e570fc519e6f521e2d0cfd43365e1"},
+    {file = "matplotlib-3.10.7-cp314-cp314t-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:4a74f79fafb2e177f240579bc83f0b60f82cc47d2f1d260f422a0627207008ca"},
+    {file = "matplotlib-3.10.7.tar.gz", hash = "sha256:a06ba7e2a2ef9131c79c49e63dad355d2d878413a0376c1727c8b9335ff731c7"},
 ]
 
 [[package]]
@@ -259,23 +248,11 @@ files = [
 
 [[package]]
 name = "narwhals"
-version = "1.42.1"
-requires_python = ">=3.8"
-summary = "Extremely lightweight compatibility layer between dataframe libraries"
-groups = ["dev"]
-marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\""
-files = [
-    {file = "narwhals-1.42.1-py3-none-any.whl", hash = "sha256:7a270d44b94ccdb277a799ae890c42e8504c537c1849f195eb14717c6184977a"},
-    {file = "narwhals-1.42.1.tar.gz", hash = "sha256:50a5635b11aeda98cf9c37e839fd34b0a24159f59a4dfae930290ad698320494"},
-]
-
-[[package]]
-name = "narwhals"
 version = "1.47.0"
 requires_python = ">=3.9"
 summary = "Extremely lightweight compatibility layer between dataframe libraries"
 groups = ["dev"]
-marker = "python_version >= \"3.13\""
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 files = [
     {file = "narwhals-1.47.0-py3-none-any.whl", hash = "sha256:8b4ead8866046829de24058d1079e776806bd4aab7d38f55f17c58ce4c0994d2"},
     {file = "narwhals-1.47.0.tar.gz", hash = "sha256:38238882f3ab2bbc8e7121bc9be951a8a58f1a810bdb14aa2b18792bafac01f8"},
@@ -295,23 +272,11 @@ files = [
 
 [[package]]
 name = "numpy"
-version = "2.3.0"
-requires_python = ">=3.11"
-summary = "Fundamental package for array computing in Python"
-groups = ["default", "dev"]
-marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\""
-files = [
-    {file = "numpy-2.3.0-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:c24bb4113c66936eeaa0dc1e47c74770453d34f46ee07ae4efd853a2ed1ad10a"},
-    {file = "numpy-2.3.0.tar.gz", hash = "sha256:581f87f9e9e9db2cba2141400e160e9dd644ee248788d6f90636eeb8fd9260a6"},
-]
-
-[[package]]
-name = "numpy"
 version = "2.3.1"
 requires_python = ">=3.11"
 summary = "Fundamental package for array computing in Python"
 groups = ["default", "dev"]
-marker = "python_version >= \"3.13\""
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 files = [
     {file = "numpy-2.3.1-cp313-cp313-manylinux_2_28_x86_64.whl", hash = "sha256:5902660491bd7a48b2ec16c23ccb9124b8abfd9583c5fdfa123fe6b421e03de1"},
     {file = "numpy-2.3.1-cp313-cp313t-manylinux_2_28_x86_64.whl", hash = "sha256:ce2ce9e5de4703a673e705183f64fd5da5bf36e7beddcb63a25ee2286e71ca48"},
@@ -324,7 +289,7 @@ version = "3.11.0"
 requires_python = ">=3.9"
 summary = "Fast, correct Python JSON library supporting dataclasses, datetimes, and numpy"
 groups = ["dev"]
-marker = "python_version >= \"3.13\""
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 files = [
     {file = "orjson-3.11.0-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2a585042104e90a61eda2564d11317b6a304eb4e71cd33e839f5af6be56c34d3"},
     {file = "orjson-3.11.0.tar.gz", hash = "sha256:2e4c129da624f291bcc607016a99e7f04a353f6874f3bd8d9b47b88597d5f700"},
@@ -344,11 +309,11 @@ files = [
 
 [[package]]
 name = "pandas"
-version = "2.3.0"
+version = "2.3.3"
 requires_python = ">=3.9"
 summary = "Powerful data structures for data analysis, time series, and statistics"
 groups = ["dev"]
-marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\""
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 dependencies = [
     "numpy>=1.22.4; python_version < \"3.11\"",
     "numpy>=1.23.2; python_version == \"3.11\"",
@@ -358,41 +323,12 @@ dependencies = [
     "tzdata>=2022.7",
 ]
 files = [
-    {file = "pandas-2.3.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ba24af48643b12ffe49b27065d3babd52702d95ab70f50e1b34f71ca703e2c0d"},
-    {file = "pandas-2.3.0.tar.gz", hash = "sha256:34600ab34ebf1131a7613a260a61dbe8b62c188ec0ea4c296da7c9a06b004133"},
-]
-
-[[package]]
-name = "pandas"
-version = "2.3.1"
-requires_python = ">=3.9"
-summary = "Powerful data structures for data analysis, time series, and statistics"
-groups = ["dev"]
-marker = "python_version >= \"3.13\""
-dependencies = [
-    "numpy>=1.22.4; python_version < \"3.11\"",
-    "numpy>=1.23.2; python_version == \"3.11\"",
-    "numpy>=1.26.0; python_version >= \"3.12\"",
-    "python-dateutil>=2.8.2",
-    "pytz>=2020.1",
-    "tzdata>=2022.7",
-]
-files = [
-    {file = "pandas-2.3.1-cp313-cp313-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2ba6aff74075311fc88504b1db890187a3cd0f887a5b10f5525f8e2ef55bfdb9"},
-    {file = "pandas-2.3.1-cp313-cp313t-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2f4d6feeba91744872a600e6edbbd5b033005b431d5ae8379abee5bcfa479fab"},
-    {file = "pandas-2.3.1.tar.gz", hash = "sha256:0a95b9ac964fe83ce317827f80304d37388ea77616b1425f0ae41c9d2d0d7bb2"},
-]
-
-[[package]]
-name = "pe"
-version = "0.5.3"
-requires_python = ">=3.8"
-summary = "Library for Parsing Expression Grammars (PEG)"
-groups = ["default"]
-marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\""
-files = [
-    {file = "pe-0.5.3-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:26f39bf8b239a3fd278be809b129bcc1429237ae4c12d902c84c91fd102e8d0a"},
-    {file = "pe-0.5.3.tar.gz", hash = "sha256:a772dccb588b12e21668a6e0ad43669faaf81541cfcab177326efe46ffdcc336"},
+    {file = "pandas-2.3.3-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:b3d11d2fda7eb164ef27ffc14b4fcab16a80e1ce67e9f57e19ec0afaf715ba89"},
+    {file = "pandas-2.3.3-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:318d77e0e42a628c04dc56bcef4b40de67918f7041c2b061af1da41dcff670ac"},
+    {file = "pandas-2.3.3-cp313-cp313t-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:900f47d8f20860de523a1ac881c4c36d65efcb2eb850e6948140fa781736e110"},
+    {file = "pandas-2.3.3-cp314-cp314-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:ee67acbbf05014ea6c763beb097e03cd629961c8a632075eeb34247120abcb4b"},
+    {file = "pandas-2.3.3-cp314-cp314t-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:2e3ebdb170b5ef78f19bfb71b0dc5dc58775032361fa188e814959b74d726dd5"},
+    {file = "pandas-2.3.3.tar.gz", hash = "sha256:e05e1af93b977f7eafa636d043f9f94c7ee3ac81af99c13508215942e64c993b"},
 ]
 
 [[package]]
@@ -401,23 +337,11 @@ version = "0.6.0"
 requires_python = ">=3.9"
 summary = "Library for Parsing Expression Grammars (PEG)"
 groups = ["default"]
-marker = "python_version >= \"3.13\""
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 files = [
+    {file = "pe-0.6.0-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:cc7e284c8214d96becc17bf77b3230a55d67399cbc89551443962665754968e8"},
     {file = "pe-0.6.0-cp313-cp313-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:0da30d1567ee4fc77e2c30061f089e73226f926246e4368e6442e6802aeb0f77"},
     {file = "pe-0.6.0.tar.gz", hash = "sha256:dabec4ba7bd5fe2ab11a39a4343feaa453f002082918586a64b9216d550787e6"},
-]
-
-[[package]]
-name = "pillow"
-version = "11.2.1"
-requires_python = ">=3.9"
-summary = "Python Imaging Library (Fork)"
-groups = ["default"]
-marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\""
-files = [
-    {file = "pillow-11.2.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0c7b29dbd4281923a2bfe562acb734cee96bbb129e96e6972d315ed9f232bef4"},
-    {file = "pillow-11.2.1-cp312-cp312-manylinux_2_28_x86_64.whl", hash = "sha256:b2dbea1012ccb784a65349f57bbc93730b96e85b42e9bf7b01ef40443db720b4"},
-    {file = "pillow-11.2.1.tar.gz", hash = "sha256:a64dd61998416367b7ef979b73d3a85853ba9bec4c2925f74e588879a58716b6"},
 ]
 
 [[package]]
@@ -426,7 +350,7 @@ version = "11.3.0"
 requires_python = ">=3.9"
 summary = "Python Imaging Library (Fork)"
 groups = ["default"]
-marker = "python_version >= \"3.13\""
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 files = [
     {file = "pillow-11.3.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl", hash = "sha256:f0f5d8f4a08090c6d6d578351a2b91acf519a54986c055af27e7a93feae6d3f1"},
     {file = "pillow-11.3.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:13f87d581e71d9189ab21fe0efb5a23e9f28552d5be6979e84001d3b8505abe8"},
@@ -441,34 +365,30 @@ files = [
 
 [[package]]
 name = "plotly"
-version = "6.1.2"
+version = "6.3.1"
 requires_python = ">=3.8"
 summary = "An open-source interactive data visualization library for Python"
 groups = ["dev"]
-marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\""
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 dependencies = [
     "narwhals>=1.15.1",
     "packaging",
 ]
 files = [
-    {file = "plotly-6.1.2-py3-none-any.whl", hash = "sha256:f1548a8ed9158d59e03d7fed548c7db5549f3130d9ae19293c8638c202648f6d"},
-    {file = "plotly-6.1.2.tar.gz", hash = "sha256:4fdaa228926ba3e3a213f4d1713287e69dcad1a7e66cf2025bd7d7026d5014b4"},
+    {file = "plotly-6.3.1-py3-none-any.whl", hash = "sha256:8b4420d1dcf2b040f5983eed433f95732ed24930e496d36eb70d211923532e64"},
+    {file = "plotly-6.3.1.tar.gz", hash = "sha256:dd896e3d940e653a7ce0470087e82c2bd903969a55e30d1b01bb389319461bb0"},
 ]
 
 [[package]]
-name = "plotly"
-version = "6.2.0"
-requires_python = ">=3.8"
-summary = "An open-source interactive data visualization library for Python"
+name = "pluggy"
+version = "1.6.0"
+requires_python = ">=3.9"
+summary = "plugin and hook calling mechanisms for python"
 groups = ["dev"]
-marker = "python_version >= \"3.13\""
-dependencies = [
-    "narwhals>=1.15.1",
-    "packaging",
-]
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 files = [
-    {file = "plotly-6.2.0-py3-none-any.whl", hash = "sha256:32c444d4c940887219cb80738317040363deefdfee4f354498cc0b6dab8978bd"},
-    {file = "plotly-6.2.0.tar.gz", hash = "sha256:9dfa23c328000f16c928beb68927444c1ab9eae837d1fe648dbcda5360c7953d"},
+    {file = "pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746"},
+    {file = "pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3"},
 ]
 
 [[package]]
@@ -485,32 +405,29 @@ files = [
 
 [[package]]
 name = "pydot"
-version = "4.0.0"
-requires_python = ">=3.8"
-summary = "Python interface to Graphviz's Dot"
-groups = ["default"]
-marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\""
-dependencies = [
-    "pyparsing>=3.0.9",
-]
-files = [
-    {file = "pydot-4.0.0-py3-none-any.whl", hash = "sha256:cf86e13a6cfe2a96758a9702537f77e0ac1368db8ef277b4d3b34473ea425c97"},
-    {file = "pydot-4.0.0.tar.gz", hash = "sha256:12f16493337cade2f7631b87c8ccd299ba2e251f3ee5d0732a058df2887afe97"},
-]
-
-[[package]]
-name = "pydot"
 version = "4.0.1"
 requires_python = ">=3.8"
 summary = "Python interface to Graphviz's Dot"
 groups = ["default"]
-marker = "python_version >= \"3.13\""
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 dependencies = [
     "pyparsing>=3.1.0",
 ]
 files = [
     {file = "pydot-4.0.1-py3-none-any.whl", hash = "sha256:869c0efadd2708c0be1f916eb669f3d664ca684bc57ffb7ecc08e70d5e93fee6"},
     {file = "pydot-4.0.1.tar.gz", hash = "sha256:c2148f681c4a33e08bf0e26a9e5f8e4099a82e0e2a068098f32ce86577364ad5"},
+]
+
+[[package]]
+name = "pygments"
+version = "2.19.2"
+requires_python = ">=3.8"
+summary = "Pygments is a syntax highlighting package written in Python."
+groups = ["dev"]
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
+files = [
+    {file = "pygments-2.19.2-py3-none-any.whl", hash = "sha256:86540386c03d588bb81d44bc3928634ff26449851e99741617ecb9037ee5ec0b"},
+    {file = "pygments-2.19.2.tar.gz", hash = "sha256:636cb2477cec7f8952536970bc533bc43743542f70392ae026374600add5b887"},
 ]
 
 [[package]]
@@ -523,6 +440,42 @@ marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\"
 files = [
     {file = "pyparsing-3.2.3-py3-none-any.whl", hash = "sha256:a749938e02d6fd0b59b356ca504a24982314bb090c383e3cf201c95ef7e2bfcf"},
     {file = "pyparsing-3.2.3.tar.gz", hash = "sha256:b9c13f1ab8b3b542f72e28f634bad4de758ab3ce4546e4301970ad6fa77c38be"},
+]
+
+[[package]]
+name = "pytest"
+version = "8.4.2"
+requires_python = ">=3.9"
+summary = "pytest: simple powerful testing with Python"
+groups = ["dev"]
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
+dependencies = [
+    "colorama>=0.4; sys_platform == \"win32\"",
+    "exceptiongroup>=1; python_version < \"3.11\"",
+    "iniconfig>=1",
+    "packaging>=20",
+    "pluggy<2,>=1.5",
+    "pygments>=2.7.2",
+    "tomli>=1; python_version < \"3.11\"",
+]
+files = [
+    {file = "pytest-8.4.2-py3-none-any.whl", hash = "sha256:872f880de3fc3a5bdc88a11b39c9710c3497a547cfa9320bc3c5e62fbf272e79"},
+    {file = "pytest-8.4.2.tar.gz", hash = "sha256:86c0d0b93306b961d58d62a4db4879f27fe25513d4b969df351abdddb3c30e01"},
+]
+
+[[package]]
+name = "pytest-timeout"
+version = "2.4.0"
+requires_python = ">=3.7"
+summary = "pytest plugin to abort hanging tests"
+groups = ["dev"]
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
+dependencies = [
+    "pytest>=7.0.0",
+]
+files = [
+    {file = "pytest_timeout-2.4.0-py3-none-any.whl", hash = "sha256:c42667e5cdadb151aeb5b26d114aff6bdf5a907f176a007a30b940d3d865b5c2"},
+    {file = "pytest_timeout-2.4.0.tar.gz", hash = "sha256:7e68e90b01f9eff71332b25001f85c75495fc4e3a836701876183c4bcfd0540a"},
 ]
 
 [[package]]
@@ -557,7 +510,7 @@ version = "3.20.1"
 requires_python = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.5"
 summary = "Simple, fast, extensible JSON encoder/decoder for Python"
 groups = ["dev"]
-marker = "python_version >= \"3.13\""
+marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
 files = [
     {file = "simplejson-3.20.1-cp313-cp313-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:ab980fcc446ab87ea0879edad41a5c28f2d86020014eb035cf5161e8de4474c6"},
     {file = "simplejson-3.20.1-py3-none-any.whl", hash = "sha256:8a6c1bbac39fa4a79f83cbf1df6ccd8ff7069582a9fd8db1e52cea073bc2c697"},
@@ -638,7 +591,7 @@ files = [
 
 [[package]]
 name = "z3-solver"
-version = "4.13.4.0"
+version = "4.15.3.0"
 summary = "an efficient SMT solver library"
 groups = ["default"]
 marker = "python_full_version == \"3.12.3\" or python_full_version == \"3.12.7\" or python_version >= \"3.13\""
@@ -646,6 +599,6 @@ dependencies = [
     "importlib-resources; python_version < \"3.9\"",
 ]
 files = [
-    {file = "z3_solver-4.13.4.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:2fb8a857adf1064f89581c424fd729ee3e8bad95f4ebf0fb4c1210f65b831f37"},
-    {file = "z3_solver-4.13.4.0.tar.gz", hash = "sha256:66944689398d19f831f94524e95e99961d998afa27cfef1918a5a441029ea73f"},
+    {file = "z3_solver-4.15.3.0-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a9afd9ceb290482097474d43f08415bcc1874f433189d1449f6c1508e9c68384"},
+    {file = "z3_solver-4.15.3.0.tar.gz", hash = "sha256:78f69aebda5519bfd8af146a129f36cf4721a3c2667e80d9fe35cc9bb4d214a6"},
 ]
