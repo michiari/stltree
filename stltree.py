@@ -29,7 +29,8 @@ import networkx
 
 from stl_consistency.parser import STLParser
 from stl_consistency.smtchecker import smt_check_consistency
-from stl_consistency.tableau import make_tableau, plot_tree
+from stl_consistency.qsmtchecker import qsmt_check_consistency
+from stl_consistency.tableau import make_tableau
 
 def read_formula(filename):
     with open(filename, 'rt') as f:
@@ -40,6 +41,7 @@ DEFAULT_DEPTH = 10000000
 def main():
     argp = argparse.ArgumentParser()
     argp.add_argument('-s', '--smt', action='store_true', help='Use SMT-based bounded satisfiability checker instead of tree-based tableau (default)')
+    argp.add_argument('-f', '--fol', action='store_true', help='Use FOL satisfiability checker instead of tree-based tableau (default)')
     argp.add_argument('-d', '--max-depth', type=int, default=DEFAULT_DEPTH, help='Build tableau up to the given depth (ignored if --smt is given)')
     argp.add_argument('-p', '--plot', type=str, help='Plot the tree-shaped tableau to the given dot file (ignored if --smt is given)')
     argp.add_argument('--print-trace', action='store_true', help='Print an example trace that satisfies the formula)')
@@ -76,6 +78,11 @@ def main():
             if res:
                 print('Trace:')
                 print(trace)
+    elif args.fol:
+        start_t = time.perf_counter()
+        parsed_formula = parser.parse_formula_as_stl_list(formula)
+        parsing_t = time.perf_counter()
+        res = qsmt_check_consistency(parsed_formula, args.mltl, args.verbose)
     else:
         start_t = time.perf_counter()
 
