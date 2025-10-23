@@ -64,8 +64,10 @@ class QSMTFormulaEncoder:
                 exists_range = z3.And(t + a <= j, j < i) if self.mltl else z3.And(t <= j, j <= i)
                 return z3.ForAll(i, z3.Implies(
                     z3.And(t + a <= i, i <= t + b),
-                    self.encode(f2, i),
-                    z3.Exists(j, z3.And(exists_range, self.encode(f1, j)))
+                    z3.Or(
+                        self.encode(f2, i),
+                        z3.Exists(j, z3.And(exists_range, self.encode(f1, j)))
+                    )
                 ))
             case '<' | '<=' | '>' | '>=' | '==' | '!=':
                 lhs = self._encode_arith_expr(formula[1], t)

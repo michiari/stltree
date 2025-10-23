@@ -38,6 +38,8 @@ def get_tableau_args(args):
         tableau_args.append('--no-simple-nodes')
     if args.no_g_f:
         tableau_args.append('--no-g-f')
+    if args.fol:
+        tableau_args.append('--fol')
 
     return tableau_args
 
@@ -180,6 +182,7 @@ if __name__ == '__main__':
     argp.add_argument('--no-memoization', action='store_true', help='Disable memoization of tableau nodes.')
     argp.add_argument('--no-simple-nodes', action='store_true', help='Disable simple nodes optimization in tableau.')
     argp.add_argument('--no-g-f', action='store_true', help='Do not use special rules for G and F in the tableau.')
+    argp.add_argument('--fol', action='store_true', help='Use FOL satisfiability checker instead of tree-based tableau (default)')
     argp.add_argument('benchmarks', type=str, help='File containing a list of banchmark files, one per line')
     subparsers = argp.add_subparsers(required=True, dest='engine')
 
