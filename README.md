@@ -42,6 +42,7 @@ If this doesn't work, try the [development instructions](#development-environmen
 | Option                              | Description                                                                                     |
 |-------------------------------------|-------------------------------------------------------------------------------------------------|
 | `-s`, `--smt`                       | Use SMT-based satisfiability checker instead of the tableau-based method.                       |
+| `-f`, `--fol`                       | Use FOL satisfiability checker instead of tree-based tableau.                                   |
 | `-d`, `--max-depth <int>`           | Maximum depth for tableau construction (ignored if `--smt` is used). Default: `10000000`.       |
 | `-p`, `--plot <file>`               | Output tableau as a `.dot` file for visualization (ignored if `--smt` is used).                 |
 | `--print-trace`                     | Print an example trace that satisfies the formula.                                              |

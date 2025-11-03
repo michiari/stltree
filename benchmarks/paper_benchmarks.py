@@ -11,6 +11,7 @@ from fractions import Fraction
 from stl_consistency.parser import STLParser, normalize_bounds
 from stl_consistency.node import Node
 from stl_consistency.smtchecker import smt_check_consistency
+from stl_consistency.qsmtchecker import qsmt_check_consistency
 from stl_consistency.tableau import make_tableau
 
 import csv
@@ -276,6 +277,16 @@ def check_dataset(dataset_name, dataset, max_depth, mode, max_quantum, timeout, 
     else:
         elapsed_smt = (time.perf_counter() - start_t) / iters
 
+    # Quantified SMT
+    start_t = time.perf_counter()
+    for _ in range(iters):
+        res_qsmt = run_with_timeout(timeout, qsmt_check_consistency, normalized_formula, False, False)
+        if res_qsmt == 'timeout':
+            elapsed_qsmt = timeout
+            break
+    else:
+        elapsed_qsmt = (time.perf_counter() - start_t) / iters
+
     # Tableau
     start_t = time.perf_counter()
     for _ in range(iters):
@@ -295,6 +306,8 @@ def check_dataset(dataset_name, dataset, max_depth, mode, max_quantum, timeout, 
         'dataset': dataset_name,
         'time_smt': elapsed_smt,
         'result_smt': res_smt,
+        'time_qsmt': elapsed_qsmt,
+        'result_qsmt': res_qsmt,
         'time_tableau': elapsed_tableau,
         'result_tableau': res_tableau
     }
@@ -305,12 +318,12 @@ def pretty_print(results, ms, csvfile):
 
     # Table
     results_matrix = [
-        [r['dataset'], timef(r['time_smt']), r['result_smt'], timef(r['time_tableau']), r['result_tableau']]
+        [r['dataset'], timef(r['time_smt']), r['result_smt'], timef(r['time_qsmt']), r['result_qsmt'], timef(r['time_tableau']), r['result_tableau']]
         for r in results
     ]
 
     # Columns in table
-    header = ["Dataset", f"SMT {timeh}", "SMT Result", f"Tableau {timeh}", "Tableau Result"]
+    header = ["Dataset", f"SMT {timeh}", "SMT Result", f"QSMT {timeh}", "QSMT Result", f"Tableau {timeh}", "Tableau Result"]
 
     print(tabulate(results_matrix, headers=header))
 

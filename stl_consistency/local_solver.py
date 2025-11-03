@@ -138,7 +138,7 @@ class LocalSolver:
                 return lhs + rhs
             case '-':
                 return lhs - rhs
-        raise ValueError(f"Operatore non gestito: {expr[0]}")
+        raise ValueError(f"Unknown operator: {expr[0]}")
 
 
 class BooleanSolver:
