@@ -120,5 +120,12 @@ class TestTableau(unittest.TestCase):
     def test_merge_imply_G(self):
         self.make_test("G[0, 10] (a -> G[10, 15] b) && G[0, 10] a && G[16, 16] !b", 200, False)
 
+    def test_real(self):
+        self.make_test("G[0,5] (x - 3.5 <= y + 2.0E2)", 200, True)
+
+    def test_rational(self):
+        self.make_test("G[0,5] (x + -3/4 <= y - 5/8) && F[1,2] (x - y > 1/8)", 200, False)
+
+
 if __name__ == '__main__':
     unittest.main()

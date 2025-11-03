@@ -87,8 +87,14 @@ class STLParser:
         def rterm_action(*rterm):
             if len(rterm) == 1:
                 return rterm[0]
+            if len(rterm) == 3 and rterm[1] == '/':
+                return ['/', rterm[0], rterm[2]]
             assert len(rterm) == 3 and rterm[0] == rterm[2] == '|'
             return ['abs', rterm[1]]
+
+        def rational_action(numerator, div, denominator):
+            assert div == '/'
+            return ['/', numerator, denominator]
 
 
         self.parser = pe.compile(
@@ -112,6 +118,7 @@ class STLParser:
                          / LPAR ImplExpr RPAR
             RExpr       <  RTerm (PM RTerm)*
             RTerm       <  Identifier
+                         / RATIONAL
                          / REAL
                          / LPAR RExpr RPAR
                          / ABSPAR RExpr ABSPAR
@@ -126,9 +133,10 @@ class STLParser:
 
             DIGITS      <- [0-9]+
             INTEGER     <- "-"? DIGITS
-            REAL        <- ~( INTEGER FRACTION? EXPONENT? )
-            FRACTION    <- "." DIGITS
+            REAL        <- ~( INTEGER FRACTIONAL? EXPONENT? )
+            FRACTIONAL  <- "." DIGITS
             EXPONENT    <- [Ee] [-+]? DIGITS
+            RATIONAL    <  ~( INTEGER ) ~'/' ~DIGITS
 
             IMPLIFF    <- ~( '->' ) / ~( '<->' )
             AND        <- '&&' / '&'
@@ -153,6 +161,7 @@ class STLParser:
                 'Term': term_action,
                 'RExpr': rexpr_action,
                 'RTerm': rterm_action,
+                'RATIONAL': rational_action,
                 'Interval': Pack(list),
                 'NOT': Constant('!'),
                 'OR': Constant('||'),
@@ -196,9 +205,9 @@ def compute_time_quantum(formula, max_quantum):
         if isinstance(formula, list):
             for elem in formula:
                 if isinstance(elem, list):
-                    if elem[0] in ['G', 'F', 'U', 'R']:  # Controlla operatori temporali
+                    if elem[0] in ['G', 'F', 'U', 'R']:
                         bounds.extend(elem[1:3])
-                    bounds.extend(extract_bounds(elem))  # Ricorsione per esplorare strutture annidate
+                    bounds.extend(extract_bounds(elem))
         return bounds
 
     # Extract all bounds

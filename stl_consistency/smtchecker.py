@@ -79,6 +79,8 @@ class SMTSTLConsistencyChecker:
             assert expr[0] == 'abs'
             return Abs(self._encode_real_expr(expr[1], encoded_time))
         assert len(expr) == 3
+        if expr[0] == '/':
+            return Q(int(expr[1]), int(expr[2]))
         op = SMTSTLConsistencyChecker.arithmetic_op_functions[expr[0]]
         return op(self._encode_real_expr(expr[1], encoded_time), self._encode_real_expr(expr[2], encoded_time))
 

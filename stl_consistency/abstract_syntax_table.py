@@ -239,6 +239,8 @@ class STLAbstractSyntaxTable:
                 assert expr[0] == 'abs'
                 return (expr[0], self._visit_real_expr(expr[1]))
             assert len(expr) == 3
+            if expr[0] == '/':
+                return tuple(expr)
             return (expr[0], self._visit_real_expr(expr[1]), self._visit_real_expr(expr[2]))
 
     def _visit_binary_variable(self, binary_var):

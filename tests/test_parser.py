@@ -68,5 +68,21 @@ class TestSTLParser(unittest.TestCase):
             ['G', '0', '5', ['||', ['>', ['abs', 'x'], '20'], ['<', ['abs', 'x'], '10']]]
         )
 
+    def test_real(self):
+        formula = "G[0,5] (x - 3.5 <= y + 2.0E2)"
+        parser = STLParser()
+        self.assertEqual(
+            parser.parse_formula_as_stl_list(formula),
+            ['G', '0', '5', ['<=', ['-', 'x', '3.5'], ['+', 'y', '2.0E2']]]
+        )
+
+    def test_rational(self):
+        formula = "G[0,5] (x + -3/4 <= y - 5/8)"
+        parser = STLParser()
+        self.assertEqual(
+            parser.parse_formula_as_stl_list(formula),
+            ['G', '0', '5', ['<=', ['+', 'x', ['/', '-3', '4']], ['-', 'y', ['/', '5', '8']]]]
+        )
+
 if __name__ == '__main__':
     unittest.main()

@@ -66,5 +66,12 @@ class TestSMTChecker(unittest.TestCase):
     def test_abs(self):
         self.make_test("G[0,5] (|x| > 20 | |x| < 10) && F[0,5] (x == -15)", False)
 
+    def test_real(self):
+        self.make_test("G[0,5] (x - 3.5 <= y + 2.0E2)", True)
+
+    def test_rational(self):
+        self.make_test("G[0,5] (x + -3/4 <= y - 5/8) && F[1,2] (x - y > 1/8)", False)
+
+
 if __name__ == '__main__':
     unittest.main()

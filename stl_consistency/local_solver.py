@@ -131,6 +131,9 @@ class LocalSolver:
             return z3.Abs(self.real_expr_to_z3(expr[1]))
 
         assert len(expr) == 3
+        if expr[0] == '/':
+            return z3.Q(int(expr[1]), int(expr[2]))
+
         lhs = self.real_expr_to_z3(expr[1])
         rhs = self.real_expr_to_z3(expr[2])
         match expr[0]:

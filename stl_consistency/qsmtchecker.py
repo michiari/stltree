@@ -108,6 +108,9 @@ class QSMTFormulaEncoder:
             return z3.Abs(self._encode_arith_expr(expr[1], t))
 
         assert len(expr) == 3
+        if expr[0] == '/':
+            return z3.Q(int(expr[1]), int(expr[2]))
+
         lhs = self._encode_arith_expr(expr[1], t)
         rhs = self._encode_arith_expr(expr[2], t)
         match expr[0]:
