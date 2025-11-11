@@ -390,7 +390,7 @@ def decompose_all_G_nodes(tableau_opts, outer_node, current_time):
         new_operands = modify_argument(G_node.operands[0], G_node, formula_opts, formula_opts)
         if new_operands:
             outer_node.operands.append(new_operands)
-        if G_node.lower == G_node.initial_upper:
+        if G_node.lower >= G_node.initial_upper:
             # Set parent to None (we do it here so that it doesn't interfere with modify_argument)
             for other in outer_node.operands:
                 temp_op = other.operands[0] if other.operator == 'O' else other
