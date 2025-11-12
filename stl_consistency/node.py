@@ -207,16 +207,18 @@ class Node:
 
     def arith_expr_to_string(expr):
         if isinstance(expr, list):
-            if len(expr) == 3 and expr[0] in {'<', '<=', '>', '>=', '==', '!=', '+', '-'}:
+            if len(expr) == 3 and expr[0] in {'<', '<=', '>', '>=', '==', '!=', '+', '-', '/'}:
                 return ' '.join([Node.arith_expr_to_string(expr[1]), expr[0], Node.arith_expr_to_string(expr[2])])
             elif len(expr) == 2 and expr[0] == 'abs':
                 return f'|{Node.arith_expr_to_string(expr[1])}|'
             elif len(expr) == 1 and isinstance(expr[0], str):
                 return expr[0]
+            else:
+                raise ValueError('Bad arithmetic expression')
         elif isinstance(expr, str):
             return expr
         else:
-            raise ValueError('Bad operator')
+            raise ValueError('Bad arithmetic expression')
 
     def __hash__(self):
         '''
