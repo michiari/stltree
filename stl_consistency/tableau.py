@@ -39,27 +39,35 @@ def modify_U_R(node):
     for i in range(len(node.operands)):
         node.operands[i] = modify_U_R(node.operands[i])
 
-    # If node.operator is Until, it becomes: (p U[a,b] q) → (p U[a,b] q) ∧ (G[0,a] p)
-    if node.operator == 'U' and node.lower > 0:
+    # If node.operator is Until, it becomes: (p U[a,b] q) → (p U[a,b] (p ∧ q) ∧ (G[0,a] p)
+    if node.operator == 'U':
         p = node[0]
+        q = node[1]
         a = node.lower
 
-        G_part = Node('G', '0', a, p)
-        new_node = Node('&&')
-        new_node.operands = [node, G_part]
-        return new_node # Sostituiamo con il nuovo nodo
+        new_q = Node('&&', p, q)
+        node.replace_operand(1, new_q)
 
-    # if node.operator is Release, it becomes: (p R[a,b] q) → (F[0,a] p) ∨ (p R[a,b] q)
-    elif node.operator == 'R' and node.lower > 0:
+        if node.lower > 0:
+            G_part = Node('G', '0', a, p)
+            new_node = Node('&&', node, G_part)
+            return new_node
+
+    # if node.operator is Release, it becomes: (p R[a,b] q) → (F[0,a] p) ∨ ((p ∧ q) R[a,b] q)
+    elif node.operator == 'R':
         p = node[0]
+        q = node[1]
         a = node.lower
 
-        F_part = Node('F', '0', a, p)
-        new_node = Node('||')
-        new_node.operands = [F_part, node]
-        return new_node
+        new_p = Node('&&', p, q)
+        node.replace_operand(0, new_p)
 
-    # return new node with updated operands
+        if node.lower > 0:
+            F_part = Node('F', '0', a, p)
+            new_node = Node('||', F_part, node)
+            return new_node
+
+    # return node with updated operands
     return node
 
 

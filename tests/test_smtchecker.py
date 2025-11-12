@@ -66,6 +66,9 @@ class TestSMTChecker(unittest.TestCase):
     def test_abs(self):
         self.make_test("G[0,5] (|x| > 20 | |x| < 10) && F[0,5] (x == -15)", False)
 
+    def test_stl_semantics(self):
+        self.make_test("((((x1 < 3/2) && (x1 + x0) != -6/7) R[0,816] ((!x0 > -4) || (x1 < 3/2))) && x0 > -4) && (((!x1 < 3/2)) U[0,836]  ((x1 + x0) != -6/7))", False)
+
     def test_real(self):
         self.make_test("G[0,5] (x - 3.5 <= y + 2.0E2)", True)
 

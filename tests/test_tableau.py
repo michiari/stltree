@@ -120,6 +120,9 @@ class TestTableau(unittest.TestCase):
     def test_merge_imply_G(self):
         self.make_test("G[0, 10] (a -> G[10, 15] b) && G[0, 10] a && G[16, 16] !b", 200, False)
 
+    def test_stl_semantics(self):
+        self.make_test("((((x1 < 3/2) && (x1 + x0) != -6/7) R[0,816] ((!x0 > -4) || (x1 < 3/2))) && x0 > -4) && (((!x1 < 3/2)) U[0,836]  ((x1 + x0) != -6/7))", 500, False)
+
     def test_real(self):
         self.make_test("G[0,5] (x - 3.5 <= y + 2.0E2)", 200, True)
 
