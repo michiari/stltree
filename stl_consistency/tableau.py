@@ -129,6 +129,7 @@ def shift_bounds(node):
             case 'G' | 'F' | 'U' | 'R':
                 f.lower -= shift_amount
                 f.upper -= shift_amount
+                f.initial_upper -= shift_amount
             case _:
                 raise RuntimeError('Trying to shift bounds of proposition')
 
@@ -144,6 +145,7 @@ def shift_bounds(node):
                 shift_backward(node[0], shift_amount)
                 node.lower += shift_amount
                 node.upper += shift_amount
+                node.initial_upper += shift_amount
         case 'U' | 'R':
             shift_bounds(node[0])
             shift_bounds(node[1])
@@ -156,6 +158,7 @@ def shift_bounds(node):
                 shift_backward(node[1], shift_amount)
                 node.lower += shift_amount
                 node.upper += shift_amount
+                node.initial_upper += shift_amount
 
 def remove_GF(node):
     match node.operator:
