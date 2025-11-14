@@ -55,7 +55,8 @@ class TestSMTChecker(unittest.TestCase):
         self.make_test("G[2,5] (x + y - z + x > 5 && x - y < 0)", True)
     
     def test_release(self):
-        self.make_test("(x == 10) R[1,6] (x < 10)", True)
+        self.make_test("(R_x == 10) R[0,6] (R_x < 10) && (R_x < 10) && F[6,6] (R_x == 10)", True, mltl=False)
+        self.make_test("(R_x == 10) R[0,6] (R_x < 10) && (R_x < 10) && F[6,6] (R_x == 10)", False, mltl=True)
 
     def test_strong_sat(self):
         formula = "G[1,2] ((x > 0 -> x == -42) && (x < 0 -> x == 42))"
