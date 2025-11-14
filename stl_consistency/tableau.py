@@ -909,20 +909,9 @@ def decompose_jump(tableau_data, node):
             if and_operand.operator in {'F', 'G', 'U', 'R'} and (jump == 1 or not and_operand.is_derived()):
                 new_node_operands.append(and_operand)
             elif and_operand.operator == 'O' and and_operand.operands[0].lower < and_operand.operands[0].upper:
-                if jump == 1:
-                    sub_formula = and_operand.operands[0].shallow_copy()
-                    sub_formula.lower = sub_formula.lower + jump
-                    new_node_operands.append(sub_formula)
-                else:
-                    if and_operand.operands[0].is_derived():  # here I need to add jump to both lower and upper extremum of the interval
-                        sub_formula = and_operand.operands[0].shallow_copy()
-                        sub_formula.lower = sub_formula.lower + jump
-                        sub_formula.upper = sub_formula.upper + jump
-                        new_node_operands.append(sub_formula)
-                    else:
-                        sub_formula = and_operand.operands[0].shallow_copy()
-                        sub_formula.lower = sub_formula.lower + jump
-                        new_node_operands.append(sub_formula)
+                sub_formula = and_operand.operands[0].shallow_copy()
+                sub_formula.lower = sub_formula.lower + jump
+                new_node_operands.append(sub_formula)
             elif trace_stack is not None and and_operand.operator in {'P', '!'}:
                 trace_stack[-1].append(str(and_operand))
 
