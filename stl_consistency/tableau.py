@@ -53,19 +53,14 @@ def modify_U_R(node):
             new_node = Node('&&', node, G_part)
             return new_node
 
-    # if node.operator is Release, it becomes: (p R[a,b] q) → (F[0,a] p) ∨ ((p ∧ q) R[a,b] q)
-    elif node.operator == 'R':
+    # if node.operator is Release, it becomes: (p R[a,b] q) → (F[0,a] p) ∨ (p R[a,b] q)
+    elif node.operator == 'R' and node.lower > 0:
         p = node[0]
-        q = node[1]
         a = node.lower
 
-        new_p = Node('&&', p, q)
-        node.replace_operand(0, new_p)
-
-        if node.lower > 0:
-            F_part = Node('F', '0', a, p)
-            new_node = Node('||', F_part, node)
-            return new_node
+        F_part = Node('F', '0', a, p)
+        new_node = Node('||', F_part, node)
+        return new_node
 
     # return node with updated operands
     return node
@@ -292,7 +287,7 @@ def decompose(tableau_data, local_solver, node, current_time):
                         break
                 case 'R':
                     if node.operands[j].lower == current_time:
-                        res = decompose_R(node, j)
+                        res = decompose_R(node, j, tableau_data.mltl)
                         break
 
     if res is not None:
@@ -507,7 +502,7 @@ def decompose_U(formula, index):
 
 
 
-def decompose_R(formula, index):
+def decompose_R(formula, index, mltl):
     '''
     :return:    p R[a,b] q becomes (q and O(pRq)) OR p
     '''
@@ -553,7 +548,10 @@ def decompose_R(formula, index):
 
     # Node where R is satisfied (p)
     new_node2 = formula.shallow_copy()
-    new_node2.replace_operand(index, modify_argument(first_operand.shallow_copy(), False), modify_argument(second_operand.shallow_copy(), False))
+    if mltl:
+        new_node2.replace_operand(index, modify_argument(first_operand.shallow_copy(), False), modify_argument(second_operand.shallow_copy(), False))
+    else:
+        new_node2.replace_operand(index, modify_argument(first_operand.shallow_copy(), False))
 
     # when OR[b,b] I remove is_derived from operands that came from the decomposition of that R
     del_parent = new_node2.operands + (new_node1.operands if R_formula.lower == R_formula.upper else [])
@@ -1165,7 +1163,7 @@ def build_decomposition_tree(tableau_data, root, max_depth):
 
 class TableauData:
 
-    def __init__(self, number_of_implications, mode, build_tree, return_trace, parallel, verbose, tableau_opts):
+    def __init__(self, number_of_implications, mode, build_tree, return_trace, parallel, verbose, tableau_opts, mltl):
         self.number_of_implications = number_of_implications
         self.build_tree = build_tree
         self.mode = mode
@@ -1180,6 +1178,7 @@ class TableauData:
         if mode == 'sat':
             self.rejected_store = []
         self.tableau_opts = tableau_opts
+        self.mltl = mltl
 
 
 def plot_tree(G):
@@ -1219,7 +1218,7 @@ def make_tableau(formula, max_depth, mode, build_tree, return_trace, parallel, v
     formula.set_initial_time()
     assign_identifier(formula)
 
-    tableau_data = TableauData(number_of_implications, mode, build_tree, return_trace, parallel, verbose, tableau_opts)
+    tableau_data = TableauData(number_of_implications, mode, build_tree, return_trace, parallel, verbose, tableau_opts, mltl)
     return build_decomposition_tree(tableau_data, formula, max_depth)
 
 

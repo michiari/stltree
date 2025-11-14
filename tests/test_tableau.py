@@ -57,7 +57,8 @@ class TestTableau(unittest.TestCase):
         self.make_test("G[2,5] (R_x + R_y - R_z + R_x > 5 && R_x - R_y < 0)", 10, True)
     
     def test_release(self):
-        self.make_test("(R_x == 10) R[1,6] (R_x < 10)", 10, True)
+        self.make_test("(R_x == 10) R[0,6] (R_x < 10) && (R_x < 10) && F[6,6] (R_x == 10)", 100, True, mltl=False)
+        self.make_test("(R_x == 10) R[0,6] (R_x < 10) && (R_x < 10) && F[6,6] (R_x == 10)", 100, False, mltl=True)
 
     def test_abs(self):
         self.make_test("G[0,5] (|x| > 20 | |x| < 10) && F[0,5] (x == -15)", 20, False)
@@ -128,6 +129,9 @@ class TestTableau(unittest.TestCase):
 
     def test_rational(self):
         self.make_test("G[0,5] (x + -3/4 <= y - 5/8) && F[1,2] (x - y > 1/8)", 200, False)
+
+    def test_jump_incr(self):
+        self.make_test("G[0,4] (!b) && a && (!a R[0,3] (c U[0,4] b))", 500, False)
 
 
 if __name__ == '__main__':
