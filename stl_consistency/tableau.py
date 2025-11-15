@@ -909,9 +909,17 @@ def decompose_jump(tableau_data, node):
             if and_operand.operator in {'F', 'G', 'U', 'R'} and (jump == 1 or not and_operand.is_derived()):
                 new_node_operands.append(and_operand)
             elif and_operand.operator == 'O' and and_operand.operands[0].lower < and_operand.operands[0].upper:
-                sub_formula = and_operand.operands[0].shallow_copy()
-                sub_formula.lower = sub_formula.lower + jump
-                new_node_operands.append(sub_formula)
+                if and_operand.operands[0].is_derived() and jump > 1 and and_operand.operands[0].operator in {'G', 'R'}:
+                    # If the bounds are equal, we don't need to add the formula, because it will be extracted by the parent after the jump.
+                    if and_operand.operands[0].lower < and_operand.operands[0].upper:
+                        sub_formula = and_operand.operands[0].shallow_copy()
+                        sub_formula.lower = sub_formula.lower + jump
+                        sub_formula.upper = sub_formula.upper + jump - 1
+                        new_node_operands.append(sub_formula)
+                else:
+                    sub_formula = and_operand.operands[0].shallow_copy()
+                    sub_formula.lower = sub_formula.lower + jump
+                    new_node_operands.append(sub_formula)
             elif trace_stack is not None and and_operand.operator in {'P', '!'}:
                 trace_stack[-1].append(str(and_operand))
 
