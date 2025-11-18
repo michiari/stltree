@@ -809,28 +809,22 @@ def flagging(node):
     return False
 
 def extract_time_instants(node, flag):
-    """
+    '''
     :return: it return the extrema of all time interval of temporal operators in the formula
     as a vector in ascending order
-    (does not include bounds of derived operators)
-    """
+    (does not include bounds of derived G and R operators)
+    '''
     time_instants = []
-    if flag:
-        for elem in node:
-            if elem.operator in {'G', 'F', 'U', 'R'} and not elem.is_derived():
-                time_instants.append(elem.lower)
-                time_instants.append(elem.upper)
-            elif elem.operator == 'O' and not elem.operands[0].is_derived():
-                time_instants.append(elem.operands[0].lower)
-                time_instants.append(elem.operands[0].upper)
-    else:
-        for elem in node:
-            if elem.operator in {'G', 'F', 'U', 'R'}:
-                time_instants.append(elem.lower)
-                time_instants.append(elem.upper)
-            elif elem.operator == 'O':
-                time_instants.append(elem.operands[0].lower)
-                time_instants.append(elem.operands[0].upper)
+    for elem in node:
+        temp_op = None
+        if elem.operator == 'O':
+            temp_op = elem.operands[0]
+        elif elem.operator in {'G', 'F', 'U', 'R'}:
+            temp_op = elem
+
+        if temp_op is not None and (not flag or elem.operator in {'F', 'U'} or not elem.is_derived()):
+            time_instants.append(temp_op.lower)
+            time_instants.append(temp_op.upper)
 
     return sorted(time_instants)
 
