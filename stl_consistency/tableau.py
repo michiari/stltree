@@ -29,7 +29,7 @@ from stl_consistency.node import Node
 from stl_consistency.local_solver import LocalSolver
 
 
-def modify_U_R(node):
+def to_mltl_semantics(node):
     """Modify formula by replacing p U[a,b] q and p R[a,b] q ."""
     """ pU[a,b]q becomes pU[a,b]q && G[0,a]p whereas (p R[a,b] q) → (F[0,a] p) || (p R[a,b] q)"""
     # If node.operator is ('P'), node is returned with no modification
@@ -37,7 +37,7 @@ def modify_U_R(node):
         return node
 
     for i in range(len(node.operands)):
-        node.operands[i] = modify_U_R(node.operands[i])
+        node.operands[i] = to_mltl_semantics(node.operands[i])
 
     # If node.operator is Until, it becomes: (p U[a,b] q) → (p U[a,b] (p ∧ q) ∧ (G[0,a] p)
     if node.operator == 'U':
@@ -54,12 +54,21 @@ def modify_U_R(node):
             return new_node
 
     # if node.operator is Release, it becomes: (p R[a,b] q) → (F[0,a] p) ∨ (p R[a,b] q)
-    elif node.operator == 'R' and node.lower > 0:
+    elif node.operator == 'R':
         p = node[0]
+        q = node[1]
         a = node.lower
+        b = node.upper
 
-        F_part = Node('F', '0', a, p)
-        new_node = Node('||', F_part, node)
+        G_part = Node('G', a, b, q)
+        U_part = Node('U', a, b, q, p)
+
+        if node.lower > 0:
+            F_part = Node('F', '0', a, p)
+            new_node = Node('||', F_part, G_part, U_part)
+        else:
+            new_node = Node('||', G_part, U_part)
+        
         return new_node
 
     # return node with updated operands
@@ -287,7 +296,7 @@ def decompose(tableau_data, local_solver, node, current_time):
                         break
                 case 'R':
                     if node.operands[j].lower == current_time:
-                        res = decompose_R(node, j, tableau_data.mltl)
+                        res = decompose_R(node, j)
                         break
 
     if res is not None:
@@ -502,7 +511,7 @@ def decompose_U(formula, index):
 
 
 
-def decompose_R(formula, index, mltl):
+def decompose_R(formula, index):
     '''
     :return:    p R[a,b] q becomes (q and O(pRq)) OR p
     '''
@@ -548,10 +557,7 @@ def decompose_R(formula, index, mltl):
 
     # Node where R is satisfied (p)
     new_node2 = formula.shallow_copy()
-    if mltl:
-        new_node2.replace_operand(index, modify_argument(first_operand.shallow_copy(), False), modify_argument(second_operand.shallow_copy(), False))
-    else:
-        new_node2.replace_operand(index, modify_argument(first_operand.shallow_copy(), False))
+    new_node2.replace_operand(index, modify_argument(first_operand.shallow_copy(), False), modify_argument(second_operand.shallow_copy(), False))
 
     # when OR[b,b] I remove is_derived from operands that came from the decomposition of that R
     del_parent = new_node2.operands + (new_node1.operands if R_formula.lower == R_formula.upper else [])
@@ -911,11 +917,11 @@ def decompose_jump(tableau_data, node):
             elif and_operand.operator == 'O' and and_operand.operands[0].lower < and_operand.operands[0].upper:
                 if and_operand.operands[0].is_derived() and jump > 1 and and_operand.operands[0].operator in {'G', 'R'}:
                     # If the bounds are equal, we don't need to add the formula, because it will be extracted by the parent after the jump.
-                    if and_operand.operands[0].lower < and_operand.operands[0].upper:
-                        sub_formula = and_operand.operands[0].shallow_copy()
-                        sub_formula.lower = sub_formula.lower + jump
-                        sub_formula.upper = sub_formula.upper + jump - 1
-                        new_node_operands.append(sub_formula)
+                    # So we add jump - 1 to the upper bound
+                    sub_formula = and_operand.operands[0].shallow_copy()
+                    sub_formula.lower = sub_formula.lower + jump
+                    sub_formula.upper = sub_formula.upper + jump - 1
+                    new_node_operands.append(sub_formula)
                 else:
                     sub_formula = and_operand.operands[0].shallow_copy()
                     sub_formula.lower = sub_formula.lower + jump
@@ -1160,7 +1166,7 @@ def build_decomposition_tree(tableau_data, root, max_depth):
 
 class TableauData:
 
-    def __init__(self, number_of_implications, mode, build_tree, return_trace, parallel, verbose, tableau_opts, mltl):
+    def __init__(self, number_of_implications, mode, build_tree, return_trace, parallel, verbose, tableau_opts):
         self.number_of_implications = number_of_implications
         self.build_tree = build_tree
         self.mode = mode
@@ -1175,7 +1181,6 @@ class TableauData:
         if mode == 'sat':
             self.rejected_store = []
         self.tableau_opts = tableau_opts
-        self.mltl = mltl
 
 
 def plot_tree(G):
@@ -1202,7 +1207,7 @@ def make_tableau(formula, max_depth, mode, build_tree, return_trace, parallel, v
         formula = Node(',', formula)
 
     if not mltl:
-        formula = modify_U_R(formula)
+        formula = to_mltl_semantics(formula)
         formula = decompose_and(formula)[0][0] # modify_U_R may add &&'s
     
     formula = push_negation(formula)
@@ -1215,7 +1220,7 @@ def make_tableau(formula, max_depth, mode, build_tree, return_trace, parallel, v
     formula.set_initial_time()
     assign_identifier(formula)
 
-    tableau_data = TableauData(number_of_implications, mode, build_tree, return_trace, parallel, verbose, tableau_opts, mltl)
+    tableau_data = TableauData(number_of_implications, mode, build_tree, return_trace, parallel, verbose, tableau_opts)
     return build_decomposition_tree(tableau_data, formula, max_depth)
 
 

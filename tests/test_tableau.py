@@ -60,6 +60,10 @@ class TestTableau(unittest.TestCase):
         self.make_test("(R_x == 10) R[0,6] (R_x < 10) && (R_x < 10) && F[6,6] (R_x == 10)", 100, True, mltl=False)
         self.make_test("(R_x == 10) R[0,6] (R_x < 10) && (R_x < 10) && F[6,6] (R_x == 10)", 100, False, mltl=True)
 
+    def test_not_release(self):
+        self.make_test("!(a R[0,10] !a)", 100, False, mltl=False)
+        self.make_test("!(a R[0,10] !a)", 100, True, mltl=True)
+
     def test_abs(self):
         self.make_test("G[0,5] (|x| > 20 | |x| < 10) && F[0,5] (x == -15)", 20, False)
 
