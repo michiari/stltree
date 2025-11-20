@@ -32,6 +32,10 @@ class QSMTFormulaEncoder:
         self.mltl = mltl
 
     def encode(self, formula, t):
+        encoded_formula = self._encode_formula(formula, t)
+        return z3.And(self.h >= 0, encoded_formula)
+
+    def _encode_formula(self, formula, t):
         match formula[0]:
             case '&&':
                 return z3.And(*(self.encode(arg, t) for arg in formula[1:]))

@@ -108,6 +108,8 @@ class TestQSMTChecker(unittest.TestCase):
     def test_rational(self):
         self.make_test("G[0,5] (x + -3/4 <= y - 5/8) && F[1,2] (x - y > 1/8)", False)
 
+    def test_rational_unsat(self):
+        self.make_test("!((x2 - x3) <= 7/2) && !((x2 - x3) != 7/6)", False)
 
 if __name__ == '__main__':
     unittest.main()
